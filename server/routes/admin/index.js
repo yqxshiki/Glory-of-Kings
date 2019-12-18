@@ -31,7 +31,7 @@ module.exports = app => {
         const items = await req.Model.find().setOptions(queryOptions).limit(10)
         res.send(items)
     })
-    // 分类详情
+    // // 分类详情
     router.get('/:id', async (req, res) => {
         const model = await req.Model.findById(req.params.id)
         res.send(model)

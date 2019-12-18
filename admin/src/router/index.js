@@ -8,7 +8,7 @@ const routes = [{
   name: 'main',
   component: Main,
   children: [{
-      // 信息
+      // 分类信息
       path: '/categories/create',
       component: () => import('../views/CategoryEdit.vue')
     },
@@ -23,7 +23,7 @@ const routes = [{
     },
 
 
-    // 武器
+    // 物品
     {
       path: 'items/create',
       component: () => import('../views/itemEdit.vue')
@@ -52,6 +52,21 @@ const routes = [{
     {
       path: 'heroes/list',
       component: () => import('../views/HeroList.vue')
+    },
+
+     // 文章
+     {
+      path: 'acticles/create',
+      component: () => import('../views/ActicleEdit.vue')
+    },
+    {
+      path: 'acticles/edit/:id',
+      component: () => import('../views/ActicleEdit.vue'),
+      props: true
+    },
+    {
+      path: 'acticles/list',
+      component: () => import('../views/ActicleList.vue')
     }
   ]
 }]
