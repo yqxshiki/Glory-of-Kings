@@ -1,6 +1,8 @@
 const express = require('express')
 
 const app = express();
+// token散列部分
+app.set('secret','4asg586ag4a6g4')
 // 解析json
 app.use(express.json())
 // 跨域

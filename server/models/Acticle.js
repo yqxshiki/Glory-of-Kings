@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-// 模型
+// 文章模型
 const schema = new mongoose.Schema({
     title: {
         type: String
