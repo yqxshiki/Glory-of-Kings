@@ -14,14 +14,14 @@ import './style.css'
 // 混入
 Vue.mixin({
   computed: {
-    uploadUrl(){
-      return this.$http.defaults.baseURL+'upload'
+    uploadUrl() {
+      return this.$http.defaults.baseURL + 'upload'
     }
   },
-  methods:{
-    getAuthHeaders(){
+  methods: {
+    getAuthHeaders() {
       return {
-        Authorization:`Bearer ${localStorage.token || ""}`
+        Authorization: `Bearer ${localStorage.token || ""}`
       }
     }
   }

@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
     username: {
-        type: String
+        type: String,
     },
     password: {
         type: String,
@@ -10,7 +10,7 @@ const schema = new mongoose.Schema({
         select: false,
         // 加密
         set(val) {
-            return require('bcrypt').hashSync(val, 10)
+            return require("bcryptjs").hashSync(val, 10)
         }
     },
 })

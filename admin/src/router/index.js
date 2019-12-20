@@ -6,7 +6,7 @@ import Login from '../views/Login.vue'
 Vue.use(VueRouter)
 
 const routes = [{
-    path: "/login",
+    path: '/login',
     name: "login",
     meta: {
       isPublic: true
@@ -116,11 +116,11 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (!to.isPublic && !localStorage.token) {
-//     return next("/login")
-//   }
-//   next();
-// })
+router.beforeEach((to, from, next) => {
+  if (!to.meta.isPublic && !localStorage.token) {
+    return next('/login')
+  }
+  next();
+})
 
 export default router

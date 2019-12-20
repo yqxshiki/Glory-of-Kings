@@ -3,6 +3,6 @@ module.exports = options => {
         // 转换文件名
         const modelname = require('inflection').classify(req.params.resource)
         req.Model = require(`../models/${modelname}`)
-        next();
+        await next();
     }
 }
