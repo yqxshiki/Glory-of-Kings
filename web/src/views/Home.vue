@@ -22,46 +22,16 @@
     </div>
     <!-- end nav icon -->
 
-    <div class="card bg-white p-3 mt-2">
-      <div class="card-header d-flex ai-center">
-        <i class="iconfont"></i>
-        <div class="fs-xl flex-1 px-2">新闻资讯</div>
-        <i class="iconfont"></i>
-      </div>
-
-      <div class="card-body pt-3">
-        <div class="nav jc-between">
-          <div class="nav-item active">
-            <div class="nav-link">热门</div>
-          </div>
-          <div class="nav-item">
-            <div class="nav-link">热门</div>
-          </div>
-          <div class="nav-item">
-            <div class="nav-link">热门</div>
-          </div>
-          <div class="nav-item">
-            <div class="nav-link">热门</div>
-          </div>
-          <div class="nav-item">
-            <div class="nav-link">热门</div>
-          </div>
+    <mylistcard icon="menu1" title="新闻资讯" :categories="[]">
+      <template #items="{category}">
+        <div class="py-2" v-for="(news,i) in category.newsList" :key="i">
+          <span>[{{news.categoryName}}]</span>
+          <span>|</span>
+          <span>{{news.title}}</span>
+          <span>{{news.date}}</span>
         </div>
-        <div class="pt-3">
-          <swiper>
-            <swiper-slide>
-              <div class="py-2" v-for="n in 5" :key="n">
-                <span>[新闻]</span>
-                <span>|</span>
-                <span></span>
-                <span>06/02</span>
-              </div>
-            </swiper-slide>
-          </swiper>
-        </div>
-      </div>
-    </div>
-
+      </template>
+    </mylistcard>
     <!-- end card -->
   </div>
 </template>
@@ -75,7 +45,19 @@ export default {
         pagination: {
           el: ".pagination-home"
         }
-      }
+      },
+      newsCats: [
+        {
+          name: "热门",
+          newsList: [
+            {
+              title: "asgagasgasgasgasg",
+              date: "06/22",
+              categoryName: "公告"
+            }
+          ]
+        }
+      ]
     };
   }
 };

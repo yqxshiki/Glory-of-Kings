@@ -5,4 +5,8 @@ module.exports = app => {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
+    
+    // 关联所有模型
+    require('require-all')(__dirname+'/../models')
+    
 }

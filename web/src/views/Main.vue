@@ -29,5 +29,11 @@
 <script>
 export default {};
 </script>
-<style>
+<style lang="scss">
+// 吸顶效果
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
 </style>
