@@ -13,7 +13,7 @@ module.exports = app => {
 		const cats = await Category.find().where({
 			parents: parents
 		}).lean()
-		const newsTitles = ["夏日新版本“稷下星之队”即将6月上线", "王者荣耀携手两大博物馆 走进稷下学宫", "王者大陆第一学院【稷下】档案", "跨界合作丨控油神装登场，唤醒无限护肤力量！", "像素游戏时代“老四强”重聚《魂斗罗：归来》，新版本、新英雄燃爆两周年庆", "6月11日全服不停机更新公告", "【已修复】王者大陆的端午宝藏活动页面异常问题说明", "6月7日体验服停机更新公告", "6月4日全服不停机更新公告", "关于2019年KPL春季赛总决赛 RNG.M vs eStarPro 补赛、赛果及世界冠军杯安排公告", "活力夏日活动周 王者峡谷好礼多", "王者大陆的端午宝藏活动公告", "峡谷庆端午 惊喜礼不断", "【场里场外，一起开黑】感恩礼包放送", "KPL总决赛来临之际 场里场外一起开黑/观赛活动开启！", "【6月15日 再战西安 · 2019年KPL春季赛总决赛重启公告】", "王者荣耀世界冠军杯荣耀来袭，KPL赛区选拔赛谁能突围而出？", "【关于2019年KPL春季赛总决赛门票退换及异地用户现场观赛补贴公告】", "KRKPL：还在用庄周打辅助？JY边路庄周带你越塔莽！", "世冠KPL赛区战队出征名单公布 王者，无惧挑战！"]
+		const newsTitles = ["新皮肤爆料丨教练小金金@你：游泳健身，了解一下", "王者荣耀交响音乐会·原曲大赏（收听同款歌单）", "王者荣耀玩家的最佳聚集地，QQ音乐推出特色专区", "模拟战爆料丨换阵营，新天赋，还能“回转”拿BUFF？", "《王者荣耀》×QQ音乐︱快来王者荣耀音乐专区听歌啦！", "12月24日全服不停机更新公告", "游戏内召唤师技能音效丢失异常说明", "12月23日体验服不停机修复公告", "12月23日体验服停机更新公告", "12月23日体验服不停机更新公告", "欢喜迎双旦 暖心好礼邀你峡谷狂欢", "恭喜AG超玩会获得秋季赛总冠军！冠军庆典惊喜不断", "KPL限定皮肤【天狼征服者】全服购买开启公告", "【看KPL秋决，赢豪华大礼】活动公告", "【奇遇咕嗒的寻宝之旅】活动公告", "东方美学的数字“实战”，《王者荣耀》越剧皮肤登陆中国美术学院的课堂", "2019年冬冠总决赛&amp;团聚夜门票今日12:00开售，多重精彩等你来看", "王者荣耀冬季冠军杯淘汰赛12月26日开战，八强对阵分组出炉", "冬季冠军杯选拔赛今日15：00热血开战，王者无界，聚有荣耀！", "当古老节气遇上电竞热潮是一种什么样的体验？"]
 		const newsList = newsTitles.map(title => {
 			const randomCats = cats.slice(0).sort((a, b) => Math.random() - 0.5)
 			return {
@@ -80,8 +80,6 @@ module.exports = app => {
 			return cat
 		})
 		res.send(cats)
-		console.log(cats)
-
 	})
 
 	// 导入英雄数据
@@ -585,5 +583,21 @@ module.exports = app => {
 		res.send(cats)
 
 	});
+
+	// 文章详情
+	router.get('/articles/:id', async (req, res) => {
+		const data = await Acticle.findById(req.params.id).lean()
+		data.related = await Acticle.find().where({
+			categories: { $in: data.categories }
+		}).limit(2)
+		res.send(data)
+	})
+	//英雄详情
+	router.get('/heroes/:id', async (req, res) => {
+		const data = await Hero.findById(req.params.id)
+			.populate('categories items1 items2 partners.hero').lean();
+		res.send(data)
+	})
+
 	app.use('/web/api', router)
 }

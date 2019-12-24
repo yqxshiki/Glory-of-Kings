@@ -20,6 +20,18 @@
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
+          <el-form-item label="背景">
+            <el-upload
+              class="avatar-uploader"
+              :action="uploadUrl"
+              :show-file-list="false"
+              :on-success="res=>$set(model,'banner',res.url)"
+              :headers="getAuthHeaders()"
+            >
+              <img v-if="model.banner" :src="model.banner" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
           <el-form-item label="称号">
             <el-input v-model="model.title"></el-input>
           </el-form-item>
@@ -100,6 +112,32 @@
             </el-col>
           </el-row>
         </el-tab-pane>
+        <!-- 最佳搭档 -->
+        <el-tab-pane label="最佳搭档" name="partners">
+          <el-button size="small" @click="model.partners.push({})">
+            <i class="el-icon-plus"></i> 添加英雄
+          </el-button>
+          <el-row type="flex" style="flex-wrap: wrap">
+            <el-col :md="12" v-for="(item, i) in model.partners" :key="i">
+              <el-form-item label="英雄">
+                <el-select filterable v-model="item.hero">
+                  <el-option
+                    v-for="hero in heroes"
+                    :key="hero._id"
+                    :value="hero._id"
+                    :label="hero.name"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="描述">
+                <el-input v-model="item.description" type="textarea"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button size="small" type="danger" @click="model.partners.splice(i, 1)">删除</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
       </el-tabs>
       <el-form-item style="margin-top:1rem;">
         <el-button type="primary" native-type="submit">保存</el-button>
@@ -115,20 +153,18 @@ export default {
   },
   data() {
     return {
+      categories: [],
+      items: [],
+      heroes: [],
       model: {
         name: "",
         avatar: "",
+        skills: [],
+        partners: [],
         scores: {
-          diffcult: 0,
-          skills: 0,
-          attack: 0,
-          aurvice: 0
-        },
-        skills: []
-      },
-      parents: [],
-      categories: [],
-      items: []
+          difficult: 0
+        }
+      }
     };
   },
   methods: {
@@ -156,21 +192,28 @@ export default {
     async fetch() {
       const res = await this.$http.get(`rest/heroes/${this.id}`);
       this.model = Object.assign({}, this.model, res.data);
+      console.log(this.model);
     },
-    // 获取英雄分类
+    // 获取英雄类别
     async fetchcategories() {
       const res = await this.$http.get(`rest/categories`);
       this.categories = res.data;
     },
-    // 获取英雄分类
+    // 获取装备
     async fetchitems() {
       const res = await this.$http.get(`rest/items`);
       this.items = res.data;
+    },
+    // 获取所有英雄
+    async fetchHeroes() {
+      const res = await this.$http.get(`rest/heroes`);
+      this.heroes = res.data;
     }
   },
   created() {
     this.fetchcategories();
     this.fetchitems();
+    this.fetchHeroes();
     this.id && this.fetch();
   }
 };

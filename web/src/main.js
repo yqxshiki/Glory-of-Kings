@@ -6,21 +6,24 @@ Vue.config.productionTip = false
 
 import './assets/style.scss'
 
+// iconfont
+import './assets/iconfont/iconfont.css'
+
 import Card from './components/Card.vue'
-Vue.component("mycard",Card)
+Vue.component("mycard", Card)
 
 import ListCard from './components/ListCard.vue'
-Vue.component("mylistcard",ListCard)
+Vue.component("mylistcard", ListCard)
 
 // 轮播图
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
-Vue.use(VueAwesomeSwiper, /* { default global options } */)
+Vue.use(VueAwesomeSwiper)
 
 // 引入axios
 import axios from 'axios'
-Vue.prototype.$http=axios.create({
-  baseURL:'http://localhost:3000/web/api'
+Vue.prototype.$http = axios.create({
+  baseURL: process.env.VUE_APP_URL || '/web/api'
 })
 
 new Vue({

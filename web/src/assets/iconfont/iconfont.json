@@ -1,0 +1,37 @@
+{
+  "id": "1580874",
+  "name": "王者荣耀",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "566774",
+      "name": "左箭头",
+      "font_class": "zuojiantou",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "975277",
+      "name": "新闻",
+      "font_class": "news",
+      "unicode": "e6aa",
+      "unicode_decimal": 59050
+    },
+    {
+      "icon_id": "3779643",
+      "name": "人事",
+      "font_class": "cansaitubiaozhuanqu-",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "8966922",
+      "name": "省略号2",
+      "font_class": "ellipsis2",
+      "unicode": "e701",
+      "unicode_decimal": 59137
+    }
+  ]
+}

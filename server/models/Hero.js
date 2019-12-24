@@ -7,6 +7,9 @@ const schema = new mongoose.Schema({
     avatar: {
         type: String
     },
+    banner: {
+        type: String
+    },
     title: {
         type: String
     },
@@ -45,7 +48,7 @@ const schema = new mongoose.Schema({
             type: String
         },
         tips: {
-            tyep: String
+            type: String
         }
     }],
     // 出装
@@ -82,4 +85,4 @@ const schema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('Hero', schema,'heroes')
+module.exports = mongoose.model('Hero', schema, 'heroes')

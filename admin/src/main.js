@@ -15,7 +15,7 @@ import './style.css'
 Vue.mixin({
   computed: {
     uploadUrl() {
-      return this.$http.defaults.baseURL + 'upload'
+      return this.$http.defaults.baseURL + '/upload'
     }
   },
   methods: {
